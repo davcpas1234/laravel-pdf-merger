@@ -1,33 +1,34 @@
 {
-    "name": "davcpas1234/laravel-pdf-merger",
-    "version": "1.0.6",
-    "type": "library",
-    "description": "Package for Laravel that merges multiple PDFs into one.",
-    "keywords": [
-      "grofgraf",
-      "laravel",
-      "pdf",
-      "merger",
-      "pdfmerger",
-      "pdf-merger"
-    ],
-    "license": "MIT",
-    "authors": [
-      {
-        "name": "Grof Graf"
-      },
-      {
-        "name": "David Passmore"
-      }
-    ],
-    "require": {
-      "illuminate/support": ">=5.5",
-      "setasign/fpdi-fpdf": ">=2.0",
-      "laravel/helpers": "^1.2"
+  "name": "davcpas1234/laravel-pdf-merger",
+  "version": "1.1.0",
+  "type": "library",
+  "description": "Package for Laravel that merges multiple PDFs into one.",
+  "keywords": [
+    "grofgraf",
+    "laravel",
+    "pdf",
+    "merger",
+    "pdfmerger",
+    "pdf-merger"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Grof Graf"
     },
-    "autoload": {
-      "psr-4": {
-        "Davcpas1234\\LaravelPDFMerger\\": "src/"
-      }
+    {
+      "name": "David Passmore"
     }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "illuminate/support": ">=5.5",
+    "setasign/fpdi-fpdf": ">=2.0",
+    "laravel/helpers": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Davcpas1234\\LaravelPDFMerger\\": "src/"
+    }
+  }
 }
