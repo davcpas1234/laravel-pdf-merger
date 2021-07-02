@@ -1,6 +1,6 @@
 {
     "name": "davcpas1234/laravel-pdf-merger",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "type": "library",
     "description": "Package for Laravel that merges multiple PDFs into one.",
     "keywords": [
@@ -15,6 +15,9 @@
     "authors": [
       {
         "name": "Grof Graf"
+      },
+      {
+        "name": "David Passmore"
       }
     ],
     "require": {
@@ -24,7 +27,7 @@
     },
     "autoload": {
       "psr-4": {
-        "GrofGraf\\LaravelPDFMerger\\": "src/"
+        "Davcpas1234\\LaravelPDFMerger\\": "src/"
       }
     }
 }
