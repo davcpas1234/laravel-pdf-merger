@@ -8,7 +8,7 @@ PDF merger for Laravel inspired by another package, created for personal use. Te
 
 ## Installation
 ```bash
- $ composer require grofgraf/laravel-pdf-merger
+ $ composer require davcpas1234/laravel-pdf-merger
 ```
 
 ## Configuration
@@ -16,12 +16,12 @@ Make the following changes to the main configuration file located at `config/app
 ```php
 'Providers' => [
    ...
-   GrofGraf\LaravelPDFMerger\Providers\PDFMergerServiceProvider::class
+   davcpas1234\LaravelPDFMerger\Providers\PDFMergerServiceProvider::class
 ],
 
 'aliases' => [
    ...
-   'PDFMerger' => GrofGraf\LaravelPDFMerger\Facades\PDFMergerFacade::class
+   'PDFMerger' => davcpas1234\LaravelPDFMerger\Facades\PDFMergerFacade::class
 ]
 ```
 
@@ -66,7 +66,8 @@ $merger->save(base_path('/public/pdfs/merged.pdf'));
 ```
 
 ## Authors
-* [GrofGraf](https://github.com/GrofGraf)
+* Original Author [GrofGraf](https://github.com/GrofGraf)
+* Updated by [davcpas1234](https://github.com/davcpas1234)
 
 
 ## Credits
