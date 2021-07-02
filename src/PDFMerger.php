@@ -5,6 +5,7 @@ namespace GrofGraf\LaravelPDFMerger;
 use setasign\Fpdi\Fpdi;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
+use Str;
 
 class PDFMerger {
     /**
@@ -66,6 +67,21 @@ class PDFMerger {
     public function init(){
       return $this;
     }
+
+    /**
+     * Add possibility to refresh underlying Fpdi library to be able to use it in long running processes
+     *
+     */
+    public function renewFpdi()
+    {
+        $this->fpdi =null;
+        $this->fpdi = new Fpdi();
+        $this->tmpFiles = null;
+        $this->tmpFiles = collect([]);
+        $this->files = null;
+        $this->files = collect([]);
+    }
+
     /**
      * Stream the merged PDF content
      *
@@ -117,7 +133,7 @@ class PDFMerger {
      * @return void
      */
     public function addPDFString($string, $pages = 'all', $orientation = null){
-        $filePath = storage_path('tmp/'.str_random(16).'.pdf');
+        $filePath = storage_path('tmp/'.Str::random(16).'.pdf');
         $this->filesystem->put($filePath, $string);
         $this->tmpFiles->push($filePath);
         return $this->addPathToPDF($filePath, $pages, $orientation);
@@ -174,7 +190,7 @@ class PDFMerger {
           for ($i = 1; $i <= $count; $i++) {
             $template   = $fpdi->importPage($i);
             $size       = $fpdi->getTemplateSize($template);
-            $fpdi->AddPage($file['orientation'], [$size['width'], $size['height']]);
+            $fpdi->AddPage(($file['orientation']=='A' ? ($size['height'] > $size['width'] ? 'P' : 'L'):$file['orientation']), [$size['width'], $size['height']]);
             $fpdi->useTemplate($template);
           }
         }else {
@@ -184,7 +200,7 @@ class PDFMerger {
               throw new \Exception("Could not load page '$page' in PDF '".$file['name']."'. Check that the page exists.");
             }
             $size = $fpdi->getTemplateSize($template);
-            $fpdi->AddPage($file['orientation'], [$size['width'], $size['height']]);
+            $fpdi->AddPage(($file['orientation']=='A'?($size['height'] > $size['width'] ? 'P' : 'L'):$file['orientation']), [$size['width'], $size['height']]);
             $fpdi->useTemplate($template);
           }
         }
@@ -208,7 +224,7 @@ class PDFMerger {
       preg_match_all('!\d+!', $first_line, $matches);
       $pdfversion = implode('.', $matches[0]);
       if($pdfversion > "1.4"){
-        $newFilePath = storage_path('tmp/' . str_random(16) . '.pdf');
+        $newFilePath = storage_path('tmp/' . Str::random(16) . '.pdf');
         //execute shell script that converts PDF to correct version and saves it to tmp folder
         shell_exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'. $newFilePath . '" "' . $filePath . '"');
         $this->tmpFiles->push($newFilePath);
@@ -223,7 +239,7 @@ class PDFMerger {
      *
      * @return void
      */
-    protected function createDirectoryForTemporaryFiles(): void
+    protected function createDirectoryForTemporaryFiles()
     {
         if (! $this->filesystem->isDirectory(storage_path('tmp'))) {
             $this->filesystem->makeDirectory(storage_path('tmp'));
