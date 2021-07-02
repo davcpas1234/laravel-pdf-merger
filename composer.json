@@ -1,6 +1,6 @@
 {
     "name": "davcpas1234/laravel-pdf-merger",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "type": "library",
     "description": "Package for Laravel that merges multiple PDFs into one.",
     "keywords": [
